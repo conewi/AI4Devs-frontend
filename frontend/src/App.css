@@ -37,19 +37,4 @@
   }
 }
 
-/* Kanban Board Styles */
-.kanban-board {
-  display: flex;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-}
 
-.kanban-column {
-  min-width: 300px;
-  max-width: 300px;
-  margin-right: 1rem;
-}
-
-.kanban-column:last-child {
-  margin-right: 0;
-}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import { getInterviewFlow, getPositionCandidates } from '../services/positionService';
+import './PositionInterviewFlow.css'; // Add this import
 
 type InterviewStep = {
   id: string;
@@ -68,39 +69,45 @@ const PositionInterviewFlow: React.FC = () => {
       <h2 className="mb-4">Interview Flow</h2>
       
       <div className="kanban-board">
-        {interviewFlow.sort((a, b) => a.order - b.order).map((step) => {
-          // Filter candidates in this step
-          const stepCandidates = candidates.filter(
-            (candidate) => candidate.currentStep === step.id
-          );
-          
-          return (
-            <div key={step.id} className="kanban-column">
-              <Card className="mb-3">
-                <Card.Header className="bg-primary text-white">
-                  <h5 className="mb-0">{step.name}</h5>
-                  <span className="badge bg-light text-dark">
-                    {stepCandidates.length} candidates
-                  </span>
-                </Card.Header>
-                <Card.Body style={{ maxHeight: '70vh', overflowY: 'auto' }}>
-                  {stepCandidates.length === 0 ? (
-                    <p className="text-muted">No candidates in this step</p>
-                  ) : (
-                    stepCandidates.map((candidate) => (
-                      <Card key={candidate.id} className="mb-2">
-                        <Card.Body>
-                          <Card.Title>{candidate.name}</Card.Title>
-                          <Card.Text>{candidate.email}</Card.Text>
-                        </Card.Body>
-                      </Card>
-                    ))
-                  )}
-                </Card.Body>
-              </Card>
-            </div>
-          );
-        })}
+        {Array.isArray(interviewFlow) && interviewFlow.length > 0 ? (
+          interviewFlow.sort((a, b) => a.order - b.order).map((step) => {
+            // Filter candidates in this step
+            const stepCandidates = candidates.filter(
+              (candidate) => candidate.currentStep === step.id
+            );
+            
+            return (
+              <div key={step.id} className="kanban-column">
+                <Card className="h-100"> {/* Use full height */}
+                  <Card.Header className="bg-primary text-white">
+                    <h5 className="mb-0">{step.name}</h5>
+                    <span className="badge bg-light text-dark">
+                      {stepCandidates.length} candidates
+                    </span>
+                  </Card.Header>
+                  <Card.Body style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+                    {stepCandidates.length === 0 ? (
+                      <p className="text-muted">No candidates in this step</p>
+                    ) : (
+                      <div className="candidate-list">
+                        {stepCandidates.map((candidate) => (
+                          <Card key={candidate.id} className="candidate-card mb-2">
+                            <Card.Body>
+                              <Card.Title>{candidate.name}</Card.Title>
+                              <Card.Text>{candidate.email}</Card.Text>
+                            </Card.Body>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </Card.Body>
+                </Card>
+              </div>
+            );
+          })
+        ) : (
+          <Alert variant="warning">No interview steps found</Alert>
+        )}
       </div>
     </Container>
   );

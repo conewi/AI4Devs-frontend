@@ -8,3 +8,7 @@ Create a new page to see for each position, the current interview flow.
 4. Make this page accessible through the url route {baseUrl}/position/id
 
 Ask me if you have questions about this implementation.
+
+# Prompt 2 (Cursor Claude Sonnet 3.7 thinking) ASK mode
+1- Modify the Kanban panel to display steps in columns instead of rows.
+2- Create and use a dedicated file to define css styles for the @PositionInterviewFlow.tsx 

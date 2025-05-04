@@ -1,0 +1,35 @@
+/* Kanban Board Styles */
+.kanban-board {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto; /* Allow horizontal scrolling for many columns */
+    padding-bottom: 1rem;
+    gap: 1rem; /* Add gap between columns */
+    min-height: 500px; /* Ensure minimum height */
+}
+
+.kanban-column {
+    min-width: 300px;
+    max-width: 300px; 
+    margin-right: 1rem;
+    flex: 0 0 auto !important; /* Don't allow columns to grow/shrink */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add subtle shadow */
+    border-radius: 4px; /* Rounded corners */
+    overflow: hidden; /* Ensure content stays within borders */
+}
+
+.kanban-column:last-child {
+    margin-right: 0;
+}
+
+/* Make cards inside columns take full width */
+.candidate-card {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-left: 4px solid #007bff; /* Add colored border */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.candidate-card:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+} 
