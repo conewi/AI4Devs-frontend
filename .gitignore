@@ -26,3 +26,11 @@ yarn-error.log*
 .vscode
 
 # .env
+backend/.vs/slnx.sqlite
+backend/.vs/backend/CopilotIndices/17.12.53.23981/CodeChunks.db
+backend/.vs/backend/CopilotIndices/17.12.53.23981/CodeChunks.db-shm
+backend/.vs/backend/CopilotIndices/17.12.53.23981/CodeChunks.db-wal
+backend/.vs/backend/CopilotIndices/17.12.53.23981/SemanticSymbols.db
+backend/.vs/backend/CopilotIndices/17.12.53.23981/SemanticSymbols.db-shm
+backend/.vs/backend/CopilotIndices/17.12.53.23981/SemanticSymbols.db-wal
+backend/.vs/backend/FileContentIndex/2feab02a-224a-4ff3-8b95-7dc2e73e8e07.vsidx

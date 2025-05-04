@@ -1,0 +1,2 @@
+### Get candidates by position
+GET http://localhost:3010/position/1/candidates
