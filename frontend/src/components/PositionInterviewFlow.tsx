@@ -10,11 +10,12 @@ type InterviewStep = {
   order: number;
 };
 
+// Update at the top of the file
 type Candidate = {
   id: string;
   name: string;
   email: string;
-  currentStep: string; // ID of the current interview step
+  currentStep: string; // Now contains the step name, not ID
 };
 
 const PositionInterviewFlow: React.FC = () => {
@@ -71,11 +72,10 @@ const PositionInterviewFlow: React.FC = () => {
       <div className="kanban-board">
         {Array.isArray(interviewFlow) && interviewFlow.length > 0 ? (
           interviewFlow.sort((a, b) => a.order - b.order).map((step) => {
-            // Filter candidates in this step
-            const stepCandidates = candidates.filter(
-              (candidate) => candidate.currentStep === step.id
-            );
-            
+            // Filter candidates in this step - match by step name instead of ID
+const stepCandidates = candidates.filter(
+  (candidate) => candidate.currentStep === step.name
+);
             return (
               <div key={step.id} className="kanban-column">
                 <Card className="h-100"> {/* Use full height */}

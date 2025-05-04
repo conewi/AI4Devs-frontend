@@ -24,27 +24,19 @@ export const getPositionCandidates = async (positionId) => {
     try {
         const response = await axios.get(`http://localhost:3010/position/${positionId}/candidates`);
         
-        // Extract candidates array and transform to expected format
-        if (response.data?.value && Array.isArray(response.data.value)) {
-            return response.data.value.map(candidate => ({
-                id: candidate.id.toString(),
+        // Process the direct array response (not wrapped in a 'value' property)
+        if (Array.isArray(response.data)) {
+            return response.data.map(candidate => ({
+                id: candidate.id?.toString() || String(Math.random()),
                 name: candidate.fullName,
                 email: candidate.applicationId ? `Application ID: ${candidate.applicationId}` : "",
-                currentStep: mapInterviewStepToId(candidate.currentInterviewStep)
+                // Store the currentInterviewStep as the currentStep
+                currentStep: candidate.currentInterviewStep
             }));
         }
         return []; // Return empty array as fallback
     } catch (error) {
+        console.error("Error fetching candidates:", error);
         throw new Error(`Error fetching candidates: ${error.message}`);
     }
-}; 
-// Helper function to map interview step names to IDs
-function mapInterviewStepToId(stepName) {
-    const stepMap = {
-        'Initial Screening': '1',
-        'Technical Interview': '2',
-        'Manager Interview': '3'
-    };
-    
-    return stepMap[stepName] || '1'; // Default to first step if unknown
-}
+};
